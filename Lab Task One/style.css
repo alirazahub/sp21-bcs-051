@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+header {
+  background-color: #393939;
+  padding: 0 100px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0 100px; */
+}
+img {
+  max-width: 100%;
+  height: 100%;
+  width: 240px;
+}
+.head-body {
+  padding: 20px 50px;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.head-body h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+.designation {
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  color: #16a6aa;
+}
+.objective {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 0px;
+}
+.banner {
+  background-color: #16a6aa;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 150px;
+  color: #393939;
+}
+.banner a {
+  text-decoration: none;
+  color: white;
+  transition: all 0.5s ease-in-out;
+}
+.banner a:hover {
+  color: #393939;
+  text-decoration: underline;
+}
+.body{
+    padding: 20px 100px;
+}
+.custom-heading {
+  position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 0px;
+    color: #16a6aa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-heading::before,
+.custom-heading::after {
+  content: "";
+  position: absolute;
+  width: 50px; /* Adjust the width as needed */
+  height: 3px; /* Adjust the height as needed */
+  background-color: #393939; /* Adjust the color as needed */
+  top: 50%; /* Position it vertically in the middle of the heading */
+  transform: translateY(-50%);
+}
+
+.custom-heading::before {
+    left: 0;
+    
+}
+
+.custom-heading::after {
+    right: 0;
+}
