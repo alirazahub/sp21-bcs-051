@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShowCase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navigation -->
+    <nav class="bg-blue-500 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-2xl font-semibold">Show<span class="text-gray-300">Case</span></a>
+            <ul class="flex space-x-6">
+                <li><a href="#features" class="text-white">Features</a></li>
+                <li><a href="#movies" class="text-white">Movies</a></li>
+                <li><a href="#contact" class="text-white">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-cover bg-center relative" style="background-image: url('cover.jpeg'); height: 80vh;">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="container mx-auto flex flex-col items-center justify-center text-white h-full relative z-10">
+            <h1 class="text-4xl font-semibold text-center">Discover the World of Movies</h1>
+            <p class="mt-4 text-xl text-center">Your one-stop destination for movie lovers.</p>
+            <a href="#features"
+                class="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">Explore
+                Now</a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="py-12">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold">Vast Movie Library</h3>
+                    <p class="mt-4 text-gray-600">Access a vast collection of movies from various genres.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold">User Reviews</h3>
+                    <p class="mt-4 text-gray-600">Read and submit user reviews to share your thoughts on movies.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold">Personalized Recommendations</h3>
+                    <p class="mt-4 text-gray-600">Get personalized movie recommendations based on your preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Movies Section -->
+    <!-- Featured Movies Section -->
+    <section id="movies" class="bg-gray-200 py-12">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center">Featured Movies</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
+                <!-- Movie Card 1 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer">
+                    <img src="img1.jpg" alt="Movie 1" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">Movie Title 1</h3>
+                        <p class="text-gray-600">Genre: Action</p>
+                        <p class="text-gray-600">Release Date: June 2023</p>
+                    </div>
+                </div>
+
+                <!-- Movie Card 2 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"> 
+                    <img src="img2.jpeg" alt="Movie 2" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">Movie Title 2</h3>
+                        <p class="text-gray-600">Genre: Drama</p>
+                        <p class="text-gray-600">Release Date: July 2023</p>
+                    </div>
+                </div>
+
+                <!-- Movie Card 3 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer">
+                    <img src="img3.jpeg" alt="Movie 3" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">Movie Title 3</h3>
+                        <p class="text-gray-600">Genre: Sci-Fi</p>
+                        <p class="text-gray-600">Release Date: August 2023</p>
+                    </div>
+                </div>
+
+                <!-- Movie Card 4 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer">
+                    <img src="img4.jpeg" alt="Movie 4" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">Movie Title 4</h3>
+                        <p class="text-gray-600">Genre: Comedy</p>
+                        <p class="text-gray-600">Release Date: September 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-blue-500 text-white py-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center">Contact Us</h2>
+            <p class="mt-4 text-gray-200 text-center">Have questions or suggestions? Contact our support team.</p>
+            <div class="mt-8 flex justify-center">
+                <a href="mailto:info@yourmovieapp.com"
+                    class="bg-white text-blue-500 hover:bg-gray-200 font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">Email
+                    Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 py-4 text-white">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 ShowCase. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
