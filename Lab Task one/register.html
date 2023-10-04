@@ -13,14 +13,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <!-- Include jQuery Validate additional methods (optional) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
+    <style>
+        .error-message {
+            color: #FF0000;
+            font-size: 12px;
+            margin: 0;
+        }
+    </style>
     <script>
         // Initialize jQuery Validate Plugin
         $(document).ready(function () {
             $("#registrationForm").validate({
                 rules: {
-                    username: {
+                    name: {
                         required: true,
-                        minlength: 5
+                        minlength: 3
                     },
                     email: {
                         required: true,
@@ -36,9 +43,9 @@
                     }
                 },
                 messages: {
-                    username: {
-                        required: "Please enter a username",
-                        minlength: "Username must be at least 5 characters"
+                    name: {
+                        required: "Please enter a name",
+                        minlength: "Name must be at least 3 characters",
                     },
                     email: {
                         required: "Please enter a valid email address",
@@ -52,6 +59,23 @@
                         required: "Please confirm your password",
                         equalTo: "Passwords do not match"
                     }
+                },
+                errorElement: "span",
+                errorClass: "error-message",
+                submitHandler: function (form) {
+                    var name = $("#name").val();
+                    var email = $("#email").val();
+                    var password = $("#password").val();
+                    var confirmPassword = $("#confirmPassword").val();
+
+                    console.log("Name: " + name);
+                    console.log("Email: " + email);
+                    console.log("Password: " + password);
+                    console.log("Confirm Password: " + confirmPassword);
+                    alert("Registration successful! Thank you for signing up.");
+
+                    // Clear form
+                    $("#registrationForm")[0].reset();
                 }
             });
         });
@@ -64,32 +88,32 @@
         <h1 class="text-xl font-semibold mb-4 text-center">User Registration</h1>
         <form id="registrationForm">
             <div class="mb-4">
-                <label for="name" class="block  font-semibold">Name:</label>
+                <label for="name" class="block text-sm font-semibold">Name:</label>
                 <input type="text" id="name" name="name"
-                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full border rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required>
             </div>
             <div class="mb-4">
-                <label for="email" class="block  font-semibold">Email:</label>
+                <label for="email" class="block text-sm font-semibold">Email:</label>
                 <input type="email" id="email" name="email"
-                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full border rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required>
             </div>
             <div class="mb-4">
-                <label for="password" class="block  font-semibold">Password:</label>
+                <label for="password" class="block text-sm font-semibold">Password:</label>
                 <input type="password" id="password" name="password"
-                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full border rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required>
             </div>
             <div class="mb-4">
-                <label for="confirmPassword" class="block  font-semibold">Confirm Password:</label>
+                <label for="confirmPassword" class="block text-sm font-semibold">Confirm Password:</label>
                 <input type="password" id="confirmPassword" name="confirmPassword"
-                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full border rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required>
             </div>
             <div class="mt-6 text-center">
                 <button type="submit"
-                    class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Register</button>
+                    class="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600">Register</button>
             </div>
         </form>
     </div>
