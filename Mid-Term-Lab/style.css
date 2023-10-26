@@ -1,0 +1,44 @@
+.nav-bar li {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.social-icons li {
+    padding: 5px;
+}
+
+.left-list.img-holder {
+    width: 33.333%;
+}
+
+.left-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #d2d6dc;
+    position: relative;
+    z-index: 1;
+}
+
+.left-list li:hover:before {
+    visibility: visible;
+    opacity: 1;
+}
+
+.left-list li:hover .img-frame img {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+/* Your existing CSS styles here */
+
+#logo {
+    display: none;
+    width: 8%;
+}
+#navbar.sticky {
+    position: sticky;
+    top: 0;
+    background-color: white; /* Change the background color when sticky */
+    z-index: 2;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a shadow below the navbar */
+}

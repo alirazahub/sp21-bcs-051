@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mid Term Lab Exam</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.onscroll = function () {
+            var navbar = document.getElementById("navbar");
+            var logo = document.getElementById("logo");
+
+            if (window.scrollY > 100) { // Adjust the scroll value as needed
+                navbar.classList.add("sticky");
+                logo.style.display = "block";
+            } else {
+                navbar.classList.remove("sticky");
+                logo.style.display = "none";
+            }
+        }
+        function doBindings() {
+            let removeMenu = document.getElementById("removeMenu");
+            removeMenu.onclick = handleRemoveMenu;
+
+        }
+        window.onload = doBindings;
+        function handleRemoveMenu() {
+            let input = document.getElementById("main-menu");
+            if (input) {
+                document.getElementById("main-menu").style.display = "none"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- header -->
+
+    <header id="main-menu">
+        <div class="flex px-[150px] justify-between items-center border-b-[1px]">
+            <div class="text-[14px]">
+                <div class="font-bold text-blue-800">Thu, Oct 26, 2523</div>
+                <div class="text-[12px]">Rabiʻ I 29, 1445 AH</div>
+                <a href="#" class="text-red-600 font-semibold">Watch Live</a>
+            </div>
+            <div id="removeMenu" class="">
+                <a href="#"><img src="logo.png" width="100" height="46" alt="Samaa-Logo"></a>
+            </div>
+            <div class=" text-right">
+                <a href="#" class="text-red-800 text-[30px] font-bold">اردو</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- nav -->
+    <nav id="navbar" class="flex justify-between px-[150px] shadow-md">
+        <ul class="flex text-blue-800 nav-bar uppercase">
+            <li id="logo" class="logo">
+                <a href="#"><img src="logo.png" width="100" height="46" alt="Samaa-News-Logo"></a>
+            </li>
+            <li class="text-gray-600"><a href="#" class="text-[17px]"> <i class="fa-solid fa-bars"></i></a></li>
+            <li class="font-bold"><a href="#">Home</a></li>
+            <li><a href="#">Pakistan</a></li>
+            <li><a href="#">Latest News</a></li>
+            <li><a href="#"></a>Money</li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Lifestyle</a></li>
+            <li><a href="#">Tech</a></li>
+            <li><a href="#">Global</a></li>
+            <li><a href="#">Health</a></li>
+            <li><a href="#">WEIRD</a></li>
+            <li><a href="#">Videos</a></li>
+            <li><a href="#">Blogs</a></li>
+        </ul>
+        <ul class="flex social-icons">
+            <li>
+                <a href="#" target="_blank">
+                    <img src="facebook.svg" width="25" height="25" alt="Facebook icon">
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank">
+                    <img src="twitter-logo.png" width="25" height="25" alt="Twitter icon">
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank">
+                    <img src="instagram-.png" width="25" height="25" alt="Instagram icon">
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank">
+                    <img src="youtube.svg" width="25" height="25" alt="youtube icon">
+                </a>
+            </li>
+        </ul>
+    </nav>
+    </div>
+
+    <!-- banner -->
+    <div class="px-[150px]">
+        <img width="100%" src="aad.jpg" alt="">
+    </div>
+
+    <!-- main -->
+    <div class="px-[150px]">
+        <div class="grid grid-cols-3 gap-10">
+
+            <ul class="left-list">
+                <li>
+                    <div class="text-[20px] font-bold hover:text-blue-800"><a href="">IPP prepares chargesheet against
+                            PML-N, previous govt</a></div>
+                    <div class="flex ">
+                        <div class="text-gray-500 text-[12px]">
+                            <p>IPP prepares narrative for election campaign</p>
+                        </div>
+                        <div class="img-holder medium-right">
+                            <div class="img-frame">
+                                <a href="#">
+                                    <img src="ipp-bigwigs.jpg" alt="IPP "></a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-[20px] font-bold hover:text-blue-800"><a href="">IPP prepares chargesheet against
+                            PML-N, previous govt</a></div>
+                    <div class="flex ">
+                        <div class="text-gray-500 text-[12px]">
+                            <p>IPP prepares narrative for election campaign</p>
+                        </div>
+                        <div class="img-holder medium-right">
+                            <div class="img-frame">
+                                <a href="#">
+                                    <img src="tlp.jpg" alt="IPP "></a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-[20px] font-bold hover:text-blue-800"><a href="">IPP prepares chargesheet against
+                            PML-N, previous govt</a></div>
+                    <div class="flex ">
+                        <div class="text-gray-500 text-[12px]">
+                            <p>IPP prepares narrative for election campaign</p>
+                        </div>
+                        <div class="img-holder medium-right">
+                            <div class="img-frame">
+                                <a href="#">
+                                    <img src="google-search-image-fact-check.jpg" alt="IPP "></a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-[20px] font-bold hover:text-blue-800"><a href="">IPP prepares chargesheet against
+                            PML-N, previous govt</a></div>
+                    <div class="flex ">
+                        <div class="text-gray-500 text-[12px]">
+                            <p>IPP prepares narrative for election campaign</p>
+                        </div>
+                        <div class="img-holder medium-right">
+                            <div class="img-frame">
+                                <a href="#">
+                                    <img src="lcimg-a631d387-432b-44a8-999a-7e82ff9be85e.jpeg" alt="IPP "></a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="hover:shadow-md cusror-pointer border-b-[1px] mb-2">
+                <a href="" class="text-blue-800 font-semibold">Global</a>
+                <h4 class="text-[18px] font-bold"><a href="#">Who is Robert Card? Shooter accused of killing 22 people
+                        in US</a></h4>
+                <div class="flex">
+                    <div class="text-[14px]">
+                        <p>Card's recent job loss and his connection to a white Subaru Outback have also been noted
+                            <div datetime="2023-10-26 10:40:53">4 hours ago</div></p>
+                    </div>
+                    <div class="w-[200px]">
+                        <a
+                            href="https://www.samaa.tv/208733288-who-is-robert-card-shooter-accused-of-killing-22-people-in-us"><img
+                                src="https://www.samaa.tv./images/robert-card.jpg"
+                                alt="Who is Robert Card? Shooter accused of killing 22 people in US"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="righ-list">
+                <ul>
+                    <li class="hover:shadow-md cusror-pointer border-b-[1px] mb-2">
+                        <a href="" class="text-blue-800 font-semibold">Global</a>
+                        <h4 class="text-[18px] font-bold"><a href="#">Who is Robert Card? Shooter accused of killing 22
+                                people in US</a></h4>
+                        <div class="flex">
+                            <div class="text-[14px]">
+                                <p>Card's recent job loss and his connection to a white Subaru Outback have also been
+                                    noted <time datetime="2023-10-26 10:40:53">4 hours ago</time></p>
+                            </div>
+                            <div class="w-[200px]">
+                                <a
+                                    href="https://www.samaa.tv/208733288-who-is-robert-card-shooter-accused-of-killing-22-people-in-us"><img
+                                        src="https://www.samaa.tv./images/robert-card.jpg"
+                                        alt="Who is Robert Card? Shooter accused of killing 22 people in US"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="hover:shadow-md cusror-pointer border-b-[1px] mb-2">
+                        <a href="" class="text-blue-800 font-semibold">Global</a>
+                        <h4 class="text-[18px] font-bold"><a href="#">Who is Robert Card? Shooter accused of killing 22
+                                people in US</a></h4>
+                        <div class="flex">
+                            <div class="text-[14px]">
+                                <p>Card's recent job loss and his connection to a white Subaru Outback have also been
+                                    noted <time datetime="2023-10-26 10:40:53">4 hours ago</time></p>
+                            </div>
+                            <div class="w-[200px]">
+                                <a
+                                    href="https://www.samaa.tv/208733288-who-is-robert-card-shooter-accused-of-killing-22-people-in-us"><img
+                                        src="https://www.samaa.tv./images/robert-card.jpg"
+                                        alt="Who is Robert Card? Shooter accused of killing 22 people in US"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="hover:shadow-md cusror-pointer border-b-[1px] mb-2">
+                        <a href="" class="text-blue-800 font-semibold">Global</a>
+                        <h4 class="text-[18px] font-bold"><a href="#">Who is Robert Card? Shooter accused of killing 22
+                                people in US</a></h4>
+                        <div class="flex">
+                            <div class="text-[14px]">
+                                <p>Card's recent job loss and his connection to a white Subaru Outback have also been
+                                    noted <time datetime="2023-10-26 10:40:53">4 hours ago</time></p>
+                            </div>
+                            <div class="w-[200px]">
+                                <a
+                                    href="https://www.samaa.tv/208733288-who-is-robert-card-shooter-accused-of-killing-22-people-in-us"><img
+                                        src="https://www.samaa.tv./images/robert-card.jpg"
+                                        alt="Who is Robert Card? Shooter accused of killing 22 people in US"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="hover:shadow-md cusror-pointer border-b-[1px] mb-2">
+                        <a href="" class="text-blue-800 font-semibold">Global</a>
+                        <h4 class="text-[18px] font-bold"><a href="#">Who is Robert Card? Shooter accused of killing 22
+                                people in US</a></h4>
+                        <div class="flex">
+                            <div class="text-[14px]">
+                                <p>Card's recent job loss and his connection to a white Subaru Outback have also been
+                                    noted <time datetime="2023-10-26 10:40:53">4 hours ago</time></p>
+                            </div>
+                            <div class="w-[200px]">
+                                <a
+                                    href="https://www.samaa.tv/208733288-who-is-robert-card-shooter-accused-of-killing-22-people-in-us"><img
+                                        src="https://www.samaa.tv./images/robert-card.jpg"
+                                        alt="Who is Robert Card? Shooter accused of killing 22 people in US"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="hover:shadow-md cusror-pointer border-b-[1px] mb-2">
+                        <a href="" class="text-blue-800 font-semibold">Global</a>
+                        <h4 class="text-[18px] font-bold"><a href="#">Who is Robert Card? Shooter accused of killing 22
+                                people in US</a></h4>
+                        <div class="flex">
+                            <div class="text-[14px]">
+                                <p>Card's recent job loss and his connection to a white Subaru Outback have also been
+                                    noted <time datetime="2023-10-26 10:40:53">4 hours ago</time></p>
+                            </div>
+                            <div class="w-[200px]">
+                                <a
+                                    href="https://www.samaa.tv/208733288-who-is-robert-card-shooter-accused-of-killing-22-people-in-us"><img
+                                        src="https://www.samaa.tv./images/robert-card.jpg"
+                                        alt="Who is Robert Card? Shooter accused of killing 22 people in US"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="hover:shadow-md cusror-pointer border-b-[1px] mb-2">
+                        <a href="" class="text-blue-800 font-semibold">Global</a>
+                        <h4 class="text-[18px] font-bold"><a href="#">Who is Robert Card? Shooter accused of killing 22
+                                people in US</a></h4>
+                        <div class="flex">
+                            <div class="text-[14px]">
+                                <p>Card's recent job loss and his connection to a white Subaru Outback have also been
+                                    noted <time datetime="2023-10-26 10:40:53">4 hours ago</time></p>
+                            </div>
+                            <div class="w-[200px]">
+                                <a
+                                    href="https://www.samaa.tv/208733288-who-is-robert-card-shooter-accused-of-killing-22-people-in-us"><img
+                                        src="https://www.samaa.tv./images/robert-card.jpg"
+                                        alt="Who is Robert Card? Shooter accused of killing 22 people in US"></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
