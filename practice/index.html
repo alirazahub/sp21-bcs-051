@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="result"></div>
+
+    <script>
+        function fetchAndRenderUsers() {
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/users',
+                method: 'GET',
+                success: function (response) {
+                    renderUsersTable(response);
+                }
+            });
+        }
+
+        // Function to render users in a table
+        function renderUsersTable(users) {
+            var table = '<table border="1"><tr><th>ID</th><th>Name</th><th>Email</th><th>City</th></tr>';
+
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
+                table += '<tr>';
+                table += '<td>' + user.id + '</td>';
+                table += '<td>' + user.name + '</td>';
+                table += '<td>' + user.email + '</td>';
+                table += '<td>' + (user.address ? user.address.city : '-') + '</td>';
+                table += '</tr>';
+            }
+
+            table += '</table>';
+            document.getElementById('result').innerHTML = table;
+        }
+        document.onload = fetchAndRenderUsers();
+    </script>
+</body>
+
+</html>

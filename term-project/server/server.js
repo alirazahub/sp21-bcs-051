@@ -1,5 +1,5 @@
-var expressLayouts = require("express-ejs-layouts");
-let express = require("express");
+const expressLayouts = require("express-ejs-layouts");
+const express = require("express");
 
 let server = express();
 server.use(express.static("public"));

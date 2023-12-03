@@ -1,0 +1,81 @@
+Movie MERN App using TMDB
+
+MAIN WEBSITE
+1- Home Page
+a) List of Movies
+b) Search Movies
+c) Filter Movies by Genre
+d) Slider of Best Movies
+
+2- Movie Page
+a) Movie Details
+b) Similar Movies
+c) Recommended Movies
+d) Cast
+e) Reviews + Add Review
+
+3- Person Page
+a) Person Details
+b) Person Movies
+c) Person TV Shows
+
+4- TV Show Page
+a) TV Show Details
+b) Similar TV Shows
+c) Recommended TV Shows
+d) Cast
+e) Reviews + Add Review
+
+5- Login Page
+a) Login with Google
+b) Login with Facebook
+c) Login with Email
+
+6- Register Page
+a) Register with Email
+
+7- Profile Page
+a) User Details
+b) User Favorites
+d) User Rated Movies
+e) User Rated TV Shows
+
+8- Genre Page
+a) Genre Details
+b) Genre Movies
+c) Genre TV Shows
+
+9- Recommened Page
+a) Recommended Movies
+b) Recommended TV Shows
+
+ADMIN PANEL
+1- Dashboard
+a) Total Users
+b) Total Movies
+c) Total TV Shows
+d) Total Genres
+e) Total Reviews
+f) Total Favorites
+g) Total Rated Movies
+h) Total Rated TV Shows
+
+2- Users
+a) List of Users
+b) User Details
+
+3- Movies
+a) List of Movies
+b) Movie Details
+
+4- TV Shows
+a) List of TV Shows
+b) TV Show Details
+
+5- Genres
+a) List of Genres
+b) Genre Details
+
+6- Reviews
+a) List of Reviews
+b) Review Details
