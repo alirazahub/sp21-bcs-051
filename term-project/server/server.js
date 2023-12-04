@@ -1,24 +1,77 @@
-const expressLayouts = require("express-ejs-layouts");
-const express = require("express");
+import express from 'express'
+import expressLayouts from 'express-ejs-layouts'
+import connectDB from './config/db.js'
+import multer from 'multer';
+import cors from 'cors'
+import bodyParser from 'body-parser';
+import fs from 'fs'
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv'
+import user from './routes/user.js'
 
-let server = express();
-server.use(express.static("public"));
-server.set("view engine", "ejs");
 
-server.use(expressLayouts);
+const app = express();
+app.use(cors())
+dotenv.config()
+connectDB();
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.use(cookieParser());
+app.use(express.json())
+app.use(bodyParser.json());
 
-server.get("/", function (req, res) {
+app.use(expressLayouts);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'images');
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.body.name);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/api/upload', upload.single("file"), (req, res) => {
+  if (req.file) {
+    res.status(200).json('File is Uploaded')
+  } else {
+    res.status(500).json('File is not Uploaded')
+  }
+});
+
+app.use('/images', express.static("images"))
+
+
+//delete Image
+app.delete('/api/delete/:id', (req, res) => {
+  try {
+    const path = `images/${req.params.id}`
+    fs.unlinkSync(path)
+    res.status(200).json('File is Deleted')
+  }
+  catch (err) {
+    res.status(500).json('File is not Deleted')
+  }
+}
+)
+
+app.get("/", function (req, res) {
   res.render("landing");
 });
 
-server.get("/login", function (req, res) {
+app.get("/login", function (req, res) {
   res.render("login");
 });
 
-server.get("/register", function (req, res) {
+app.get("/register", function (req, res) {
   res.render("register");
 });
 
-server.listen(5000, function () {
-  console.log("server is running at Port 5000");
-});
+
+app.use('/api/user', user)
+
+
+
+const PORT = process.env.PORT || 5000
+app.listen(PORT, console.log(`Server is running on port ${PORT}`))

@@ -35,12 +35,17 @@ const items = [
         subnavs: [],
     },
     {
+        to: 'cast',
+        label: 'Casts',
+        icon: <AiOutlineUser  size={25} />,
+        subnavs: [],
+    },
+    {
         to: 'ratings',
         label: 'Ratings',
         icon: <MdOutlineStarRate  size={25} />,
         subnavs: [],
     },
-    
     {
         to: 'document-library',
         label: 'Document Library',

@@ -9,6 +9,8 @@ import MainDashbord from './pages/EnrollmentJourny/MainDashbord';
 import Users from './pages/Users';
 import Movies from './pages/Movies';
 import TvShows from './pages/TvShows';
+import Genres from './pages/Genres';
+import Cast from './pages/Cast';
 
 
 function App() {
@@ -20,7 +22,9 @@ function App() {
           <Route path="dashboard" element={<MainDashbord />} />
           <Route path="users" element={<Users />} />
           <Route path="movies" element={<Movies />} />
+          <Route path="cast" element={<Cast />} />
           <Route path="tv-shows" element={<TvShows />} />
+          <Route path="genres" element={<Genres />} />
           <Route path="document-library" element={<DocumentLibrary />} />
           <Route path="users" element={<DocumentLibrary />} />
           <Route path="student-list" element={<StudentList />} />
