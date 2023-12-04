@@ -1,4 +1,4 @@
-<nav class="bg-blue-500 py-4">
+<nav class="bg-blue-500 p-4">
     <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center justify-center">
             <a href="/" class="text-white text-2xl font-semibold">ShowCase</a>
@@ -20,9 +20,16 @@
             </ul>
         </div>
         <ul class="flex space-x-6">
-            <li><a href="login"
+            <li>
+                <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/api/user/logout"
+                    class="bg-white text-blue-500 hover:bg-gray-200 font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">Logout</a>
+                <% } else { %>
+                <a href="login"
                     class="bg-white text-blue-500 hover:bg-gray-200 font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">Login</a>
+                <% } %>
             </li>
+            
             <li><i class="fas fa-search text-white text-xl cursor-pointer" id="search-icon"></i>
                 <i class="fas fa-times text-white text-xl cursor-pointer hidden" id="close-icon"></i>
             </li>

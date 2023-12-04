@@ -91,7 +91,31 @@
                 console.log("Email: " + email);
                 console.log("Password: " + password);
                 console.log("Confirm Password: " + confirmPassword);
-                alert("Registration successful! Thank you for signing up.");
+                // alert("Registration successful! Thank you for signing up.");
+
+                $.ajax({
+                    url: "/api/user/user/register",
+                    type: "POST",
+                    data: {
+                        name: name,
+                        email: email,
+                        password: password,
+                        confirmPassword: confirmPassword
+                    },
+                    success: function (data) {
+                        console.log("data", data)
+                        if (data.status) {
+                            window.location.href = "/login";
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                        console.log(error)
+                        alert(JSON.parse(xhr.responseText).message);
+                    }
+                });
 
                 // Clear form
                 $("#registrationForm")[0].reset();

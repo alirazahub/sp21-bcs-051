@@ -8,6 +8,10 @@ import fs from 'fs'
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv'
 import user from './routes/user.js'
+import admin from './routes/admin.js'
+import Movie from './models/movieModel.js'
+import session from 'express-session'
+import { isAuthenticated } from './middleware/verifyUser.js';
 
 
 const app = express();
@@ -56,12 +60,31 @@ app.delete('/api/delete/:id', (req, res) => {
 }
 )
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: process.env.JWT_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.get("/", function (req, res) {
-  res.render("landing");
+  res.render("landing", { user: req.session.user });
 });
 
 app.get("/login", function (req, res) {
   res.render("login");
+});
+// Add logout route and logic to clear session data
+app.get('/api/user/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('session-id'); // Clear session cookie
+    res.redirect('/login');
+  });
+});
+
+app.get("/movies", async function (req, res) {
+    let records = await Movie.find();
+  res.render("movies", { movies: records });
 });
 
 app.get("/register", function (req, res) {
@@ -70,6 +93,7 @@ app.get("/register", function (req, res) {
 
 
 app.use('/api/user', user)
+app.use('/api/admin', admin)
 
 
 

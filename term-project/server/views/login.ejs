@@ -56,12 +56,30 @@
                 var email = $("#email").val();
                 var password = $("#password").val();
 
-                console.log("Email: " + email);
-                console.log("Password: " + password);
-                alert("Registration successful! Thank you for signing up.");
+                $.ajax({
+                    url: "/api/user/user/login",
+                    type: "POST",
+                    data: {
+                        email: email,
+                        password: password
+                    },
+                    success: function (data) {
+                        console.log("data",data)
+                        if (data.status) {
+                            window.location.href = "/";
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                        console.log(error)
+                        alert(JSON.parse(xhr.responseText).message);
+                    }
+                });
 
                 // Clear form
-                $("#loginForm")[0].reset();
+                // $("#loginForm")[0].reset();
             }
         });
     });
