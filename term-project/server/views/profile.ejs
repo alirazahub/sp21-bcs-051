@@ -1,0 +1,98 @@
+<!-- <div>
+    helo iam profile
+    <% if (typeof user !=='undefined' && user) { %>
+        <h1>
+            <%= user.name %>
+        </h1>
+        <h1>
+            <%= user.email %>
+        </h1>
+        <h1>
+            <%= user._id %>
+        </h1>
+        <% } else { %>
+            <h1>
+                please login
+            </h1>
+            <% } %>
+</div> -->
+
+<body class="bg-gray-100">
+    <div class="container mx-auto my-10">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h1 class="text-2xl font-semibold mb-4">User Profile</h1>
+            <div id="profileContent">
+                <!-- Display user information -->
+                <p><strong>Name:</strong> Ali Raza</p>
+                <p><strong>Student Status:</strong> Final Year Computer Science</p>
+                <p><strong>University:</strong> COMSATS University Islamabad, Lahore Campus</p>
+                <p><strong>Role:</strong> Full Stack Developer</p>
+                <button id="editBtn" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Edit
+                    Profile</button>
+            </div>
+            <div id="editContent" class="hidden mt-4">
+                <!-- Editable fields -->
+                <form id="editForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="border rounded w-full p-2 mb-2" value="Ali Raza">
+
+                    <label for="status">Student Status:</label>
+                    <input type="text" id="status" name="status" class="border rounded w-full p-2 mb-2"
+                        value="Final Year Computer Science">
+
+                    <label for="university">University:</label>
+                    <input type="text" id="university" name="university" class="border rounded w-full p-2 mb-2"
+                        value="COMSATS University Islamabad, Lahore Campus">
+
+                    <label for="role">Role:</label>
+                    <input type="text" id="role" name="role" class="border rounded w-full p-2 mb-2"
+                        value="Full Stack Developer">
+                    <button type="button" id="updateBtn"
+                        class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const profileContent = document.getElementById("profileContent");
+            const editContent = document.getElementById("editContent");
+            const editBtn = document.getElementById("editBtn");
+            const updateBtn = document.getElementById("updateBtn");
+            const editForm = document.getElementById("editForm");
+
+            editBtn.addEventListener("click", function () {
+                profileContent.classList.add("hidden");
+                editContent.classList.remove("hidden");
+            });
+
+            updateBtn.addEventListener("click", function () {
+                const formData = new FormData(editForm);
+                alert(user._id)
+                // axios.post("/api/user/user/profile", Object.fromEntries(formData))
+                //     .then(response => {
+                //         // Update the profile content with the new values
+                //         // You may need to modify this part based on your API response structure
+                //         profileContent.innerHTML = `
+                //     <p><strong>Name:</strong> ${response.data.name}</p>
+                //     <p><strong>Student Status:</strong> ${response.data.status}</p>
+                //     <p><strong>University:</strong> ${response.data.university}</p>
+                //     <p><strong>Role:</strong> ${response.data.role}</p>
+                //     <button id="editBtn" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Edit Profile</button>
+                // `;
+
+                //         // Hide the edit content and show the profile content
+                //         profileContent.classList.remove("hidden");
+                //         editContent.classList.add("hidden");
+                //     })
+                //     .catch(error => {
+                //         console.error("Error updating profile:", error);
+                //         alert("Error updating profile");
+                //     });
+            });
+        });
+
+    </script>
+</body>

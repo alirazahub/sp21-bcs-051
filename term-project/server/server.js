@@ -67,12 +67,12 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-app.get("/", function (req, res) {
-  res.render("landing", { user: req.session.user });
+app.get('/', function (req, res) {
+  res.render('landing', { user: req.session.user });
 });
 
-app.get("/login", function (req, res) {
-  res.render("login");
+app.get('/login', function (req, res) {
+  res.render('login');
 });
 // Add logout route and logic to clear session data
 app.get('/api/user/logout', (req, res) => {
@@ -82,16 +82,27 @@ app.get('/api/user/logout', (req, res) => {
   });
 });
 
-app.get("/movies", async function (req, res) {
+app.get('/movies', async function (req, res) {
     let records = await Movie.find();
   res.render("movies", { movies: records });
 });
 
-app.get("/register", function (req, res) {
+app.get('/register', function (req, res) {
   res.render("register");
 });
 
+app.get('/profile', isAuthenticated, function (req, res) {
+  res.render("profile", { user: req.session.user });
+});
 
+
+
+
+
+//  backend api routes
+app.get('/api', (req, res) => {
+  res.send('Welcome to the Movie App API!')
+})
 app.use('/api/user', user)
 app.use('/api/admin', admin)
 

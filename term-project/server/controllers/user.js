@@ -43,3 +43,22 @@ export const register = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message, status: false })
     }
 })
+
+export const updateProfile = asyncHandler(async (req, res) => {
+    const { name, email, id } = req.body;
+
+    try {
+        const user = await User.findById(id)
+        if (!user) {
+            res.status(400).json({ message: 'User does not exist', status: false })
+        }
+
+        user.name = name || user.name;
+        user.email = email || user.email;
+
+        await user.save()
+        res.status(201).json({ message: 'User updated successfully', status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
