@@ -1,15 +1,15 @@
-import { LuLayoutDashboard } from 'react-icons/lu';
+// import { LuLayoutDashboard } from 'react-icons/lu';
 import { AiOutlineInfoCircle, AiOutlineUser, AiOutlineCompass } from 'react-icons/ai';
 import { MdOutlineMovieFilter, MdOutlineStarRate } from 'react-icons/md';
 import { PiUsersBold } from 'react-icons/pi';
 import { RiMovie2Line, RiSlideshow3Line } from "react-icons/ri";
 const items = [
-    {
-        to: 'dashboard',
-        label: 'Dashboard',
-        icon: <LuLayoutDashboard size={25} />,
-        subnavs: [],
-    },
+    // {
+    //     to: 'dashboard',
+    //     label: 'Dashboard',
+    //     icon: <LuLayoutDashboard size={25} />,
+    //     subnavs: [],
+    // },
     {
         to: 'users',
         label: 'Users',

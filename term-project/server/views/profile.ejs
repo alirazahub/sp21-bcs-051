@@ -161,12 +161,12 @@
                             <label for="language">Language:</label>
                             <select id="language" name="language"
                                 class="border rounded w-full p-2 mb-2 outline-none focus:border-blue-500">
-                                <option value="English" <%=user.gender==='English' ? 'selected' : '' %>>English</option>
-                                <option value="Hindi" <%=user.gender==='Hindi' ? 'selected' : '' %>>Hindi</option>
-                                <option value="Urdu" <%=user.gender==='Urdu' ? 'selected' : '' %>>Urdu</option>
-                                <option value="Chinese" <%=user.gender==='Chinese' ? 'selected' : '' %>>Chinese</option>
-                                <option value="German" <%=user.gender==='German' ? 'selected' : '' %>>German</option>
-                                <option value="French" <%=user.gender==='French' ? 'selected' : '' %>>French</option>
+                                <option value="English" <%=user.language==='English' ? 'selected' : '' %>>English</option>
+                                <option value="Hindi" <%=user.language==='Hindi' ? 'selected' : '' %>>Hindi</option>
+                                <option value="Urdu" <%=user.language==='Urdu' ? 'selected' : '' %>>Urdu</option>
+                                <option value="Chinese" <%=user.language==='Chinese' ? 'selected' : '' %>>Chinese</option>
+                                <option value="German" <%=user.language==='German' ? 'selected' : '' %>>German</option>
+                                <option value="French" <%=user.language==='French' ? 'selected' : '' %>>French</option>
                             </select>
                         </div>
                         <div class="w-1/2 pl-2">
@@ -193,7 +193,7 @@
             await axios.post("/api/upload", dataa)
                 .then(async (response) => {
                     if (response.data.status) {
-                        await axios.put("/api/user/user/change-profile-img/<%= user._id %>", { image: filename })
+                        await axios.put("/api/user/change-profile-img/<%= user._id %>", { image: filename })
                             .then(response => {
                                 if (response.data.status) {
                                     alert("Profile image updated successfully");
@@ -251,7 +251,7 @@
 
             updateBtn.addEventListener("click", function () {
                 const formData = new FormData(editForm);
-                axios.put("/api/user/user/profile/<%= user._id %>", Object.fromEntries(formData))
+                axios.put("/api/user/profile/<%= user._id %>", Object.fromEntries(formData))
                     .then(response => {
                         if (response.data.status) {
                             alert("Profile updated successfully");
