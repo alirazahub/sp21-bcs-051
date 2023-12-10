@@ -12,19 +12,17 @@ import admin from './routes/admin.js'
 import Movie from './models/movieModel.js'
 import session from 'express-session'
 import { isAuthenticated } from './middleware/verifyUser.js';
+import User from './models/userModel.js';
 
 
 const app = express();
 app.use(cors())
 dotenv.config()
 connectDB();
-app.use(express.static("public"));
-app.set("view engine", "ejs");
 app.use(cookieParser());
 app.use(express.json())
 app.use(bodyParser.json());
 
-app.use(expressLayouts);
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'images');
@@ -38,11 +36,12 @@ const upload = multer({ storage: storage });
 
 app.post('/api/upload', upload.single("file"), (req, res) => {
   if (req.file) {
-    res.status(200).json('File is Uploaded')
+    res.status(200).send({ message: 'File is Uploaded', status: true })
   } else {
-    res.status(500).json('File is not Uploaded')
+    res.status(500).send({ message: 'File is not Uploaded', status: false })
   }
 });
+
 
 app.use('/images', express.static("images"))
 
@@ -59,6 +58,10 @@ app.delete('/api/delete/:id', (req, res) => {
   }
 }
 )
+
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.use(expressLayouts);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -83,7 +86,7 @@ app.get('/api/user/logout', (req, res) => {
 });
 
 app.get('/movies', async function (req, res) {
-    let records = await Movie.find();
+  let records = await Movie.find();
   res.render("movies", { movies: records });
 });
 
@@ -91,8 +94,9 @@ app.get('/register', function (req, res) {
   res.render("register");
 });
 
-app.get('/profile', isAuthenticated, function (req, res) {
-  res.render("profile", { user: req.session.user });
+app.get('/profile', isAuthenticated, async (req, res) => {
+  const user = await User.findById(req?.session?.user?._id)
+  res.render("profile", { user });
 });
 
 

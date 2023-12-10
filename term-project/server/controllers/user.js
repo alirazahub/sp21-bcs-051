@@ -45,19 +45,46 @@ export const register = asyncHandler(async (req, res) => {
 })
 
 export const updateProfile = asyncHandler(async (req, res) => {
-    const { name, email, id } = req.body;
+    const { id } = req.params
 
+    const { firstName, lastName, email, gender, dateOfBirth, address, city, country, image, language } = req.body;
     try {
         const user = await User.findById(id)
         if (!user) {
-            res.status(400).json({ message: 'User does not exist', status: false })
+            res.status(400).json({ message: 'User does not exist', user, status: false })
         }
 
-        user.name = name || user.name;
+        user.firstName = firstName || user.firstName;
+        user.lastName = lastName || user.lastName;
+        user.gender = gender || user.gender;
+        user.dateOfBirth = dateOfBirth || user.dateOfBirth;
+        user.address = address || user.address;
+        user.city = city || user.city;
+        user.country = country || user.country;
+        user.image = image || user.image;
+        user.language = language || user.language;
         user.email = email || user.email;
 
         await user.save()
-        res.status(201).json({ message: 'User updated successfully', status: true })
+        res.status(201).json({ message: 'User updated successfully', user, status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const updateProfileImage = asyncHandler(async (req, res) => {
+    const { id } = req.params
+
+    const { image } = req.body;
+    try {
+        const user = await User.findById(id)
+        if (!user) {
+            res.status(400).json({ message: 'User does not exist', user, status: false })
+        }
+        user.image = image || user.image;
+
+        await user.save()
+        res.status(201).json({ message: 'image updated successfully', user, status: true })
     } catch (error) {
         res.status(500).json({ message: error.message, status: false })
     }
