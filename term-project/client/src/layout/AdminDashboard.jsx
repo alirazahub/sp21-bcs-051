@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Dropdown, Space } from 'antd';
+import { Layout, Menu, Dropdown, Space, notification } from 'antd';
 import {
     UserOutlined,
     BellOutlined,
@@ -9,31 +9,37 @@ import { IoMailUnreadOutline } from 'react-icons/io5';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import './adminDashboard.css';
 import { items } from './dashboardData';
-import { FiSearch } from 'react-icons/fi';
+import { FiLogOut, FiSearch, FiUser } from 'react-icons/fi';
 import logo from "../assets/logo.png"
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { AiOutlineInfoCircle, AiOutlineUser, AiOutlineCompass, } from 'react-icons/ai';
 import { IoMdStats } from 'react-icons/io';
 import { RxDashboard } from 'react-icons/rx';
+import { useCookies } from 'react-cookie';
+
 
 const { Header, Content, Sider } = Layout;
 
-const navSubLinks = [
-    {
-        key: '2',
-        label: 'First Item'
-    },
-    {
-        key: '3',
-        label: 'New Item'
-    },
-    {
-        key: '4',
-        label: 'Another Item',
-    },
-];
 const Dashboard = () => {
     const navigate = useNavigate();
+    //eslint-disable-next-line
+    const [cookies, setCookie, removeCookie] = useCookies(['x-auth-admin']);
+    const handleLogout = () => {
+        removeCookie('x-auth-admin', { path: '/' });
+        notification.success({
+            message: 'Logout Successful',
+            description: 'You have been logged out successfully!',
+        });
+        // navigate('/login');
+    }
+    const navSubLinks = [
+        {
+            key: '1',
+            label: 'Logout',
+            icon: <FiLogOut size={25}/>,
+            onClick: () =>  handleLogout() ,
+        },
+    ];
     const mobileItems = [
         {
             to: 'enrollment-journy',
@@ -225,12 +231,12 @@ const Dashboard = () => {
                         </Menu>
                     </Sider>
                     <Layout>
-                        <Header className='dashboard-header sm:px-4 px-2 flex justify-between'>
+                        <Header className='dashboard-header sm:px-4 px-2 flex justify-between items-center'>
                             <div className='flex p-2'>
                                 <FiSearch color='grey' size={26} className='mt-2' />
                                 <input type="text" placeholder='Search Something.....' />
                             </div>
-                            <div className='flex'>
+                            <div className='flex justify-between items-center'>
                                 <div className='flex'>
                                     <Dropdown
                                         className='ml-2'
@@ -239,9 +245,9 @@ const Dashboard = () => {
                                         }}
                                     >
                                         <Link onClick={(e) => e.preventDefault()}>
-                                        <div className='user-icon'>
-                                            <UserOutlined style={{ fontSize: 25 }} />
-                                        </div>
+                                            <div className='user-icon'>
+                                                <UserOutlined style={{ fontSize: 25 }} />
+                                            </div>
                                         </Link>
                                     </Dropdown>
                                 </div>

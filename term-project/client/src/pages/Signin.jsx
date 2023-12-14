@@ -57,7 +57,7 @@ const Signin = () => {
           <h2 className="text-xl font-bold mb-4 text-center">Admin Login</h2>
           <Form.Item
             name="email"
-            rules={[{ required: true, message: 'Please enter your email!' }]}
+            rules={[{ required: true, message: 'Please enter your email!', type: 'email' }]}
           >
             <Input
               placeholder="Email"

@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import jwt from 'jsonwebtoken'
 import Admin from '../models/adminModel.js';
+import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs'
 
 export const login = asyncHandler(async (req, res) => {
@@ -47,9 +48,50 @@ export const register = asyncHandler(async (req, res) => {
 export const verify = asyncHandler(async (req, res) => {
     const admin = await Admin.findById(req.admin.id)
     if (admin) {
-        res.status(200).json({ admin, success: true })
+        res.status(200).json({ admin, status: true })
     }
     else {
         res.status(401).json({ message: "Invalid Admin Data!" })
+    }
+})
+
+export const allUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({}).sort({ createdAt: -1 })
+    if (users) {
+        res.status(200).json({ users, status: true })
+    }
+    else {
+        res.status(401).json({ message: "Invalid Admin Data!" })
+    }
+})
+
+export const deleteUser = asyncHandler(async (req, res) => {
+    try {
+        await User.findOneAndDelete({ _id: req.params.id })
+        res.status(200).json({ message: 'User deleted successfully', status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const addNewUser = asyncHandler(async (req, res) => {
+    const { firstName, lastName, email, gender, city } = req.body;
+
+    try {
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(email, salt)
+        const newUser = await User.create({
+            firstName,
+            lastName,
+            email,
+            gender,
+            city,
+            password: hashedPassword
+        })
+        const user = await newUser.save()
+
+        res.status(201).json({ message: 'User created successfully', user, status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
     }
 })
