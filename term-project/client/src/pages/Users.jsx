@@ -207,7 +207,7 @@ const Users = () => {
 
                     <Form.Item>
                         <Button type="primary" htmlType="submit" className="w-full" danger>
-                            Submit
+                            Add User
                         </Button>
                     </Form.Item>
                 </Form>

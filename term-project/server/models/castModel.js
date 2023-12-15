@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 const castScheme = mongoose.Schema({
-    castId: String,
     firstName: String,
     lastName: String,
     email: String,

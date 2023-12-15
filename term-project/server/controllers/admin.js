@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import Admin from '../models/adminModel.js';
 import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs'
+import Genere from '../models/genereModel.js';
 
 export const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -91,6 +92,40 @@ export const addNewUser = asyncHandler(async (req, res) => {
         const user = await newUser.save()
 
         res.status(201).json({ message: 'User created successfully', user, status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const addGenere = asyncHandler(async (req, res) => {
+    const { name } = req.body;
+
+    try {
+        const newGenere = await Genere.create({
+            name
+        })
+        const genere = await newGenere.save()
+
+        res.status(201).json({ message: 'Genere created successfully', genere, status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const allGeneres = asyncHandler(async (req, res) => {
+    const generes = await Genere.find({}).sort({ createdAt: -1 })
+    if (generes) {
+        res.status(200).json({ generes, status: true })
+    }
+    else {
+        res.status(401).json({ message: "Invalid Admin Data!" })
+    }
+})
+
+export const deleteGenere = asyncHandler(async (req, res) => {
+    try {
+        await Genere.findOneAndDelete({ _id: req.params.id })
+        res.status(200).json({ message: 'Genere deleted successfully', status: true })
     } catch (error) {
         res.status(500).json({ message: error.message, status: false })
     }
