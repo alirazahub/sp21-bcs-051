@@ -17,6 +17,16 @@ const moviesScheme = mongoose.Schema({
     duration: String,
     photos: [String],
     trailer: String,
+    reviews:[
+        {
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            rating: String,
+            review: String
+        }
+    ]
 }, {
     timestamps: true
 }

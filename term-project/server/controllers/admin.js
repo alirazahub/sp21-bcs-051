@@ -131,7 +131,7 @@ export const updateGenere = asyncHandler(async (req, res) => {
             genere.name = req.body.name || genere.name
 
             const updatedGenere = await genere.save()
-            res.status(200).json({ message: 'Genere updated successfully', genere:updatedGenere, status: true })
+            res.status(200).json({ message: 'Genere updated successfully', genere: updatedGenere, status: true })
         }
         else {
             res.status(401).json({ message: "Invalid Admin Data!" })
@@ -233,6 +233,65 @@ export const allMovies = asyncHandler(async (req, res) => {
     }
 });
 
+export const movie = asyncHandler(async (req, res) => {
+    const movie = await Movie.findById(req.params.id)
+        .populate('allCast.id')
+        .sort({ createdAt: -1 });
+
+    if (movie) {
+        const generess = [], prducerss = [], writerss = [], directorss = []
+        for (const genere of movie.genere) {
+            const genereData = await Genere.findById(genere);
+            generess.push(genereData);
+        }
+        for (const prducer of movie.prducer) {
+            const prducerData = await Cast.findById(prducer);
+            prducerss.push(prducerData);
+        }
+        for (const writer of movie.writer) {
+            const writerData = await Cast.findById(writer);
+            writerss.push(writerData);
+        }
+        for (const director of movie.director) {
+            const directorData = await Cast.findById(director);
+            directorss.push(directorData);
+        }
+        const newMovie = {
+            ...movie._doc,
+            genere: generess,
+            prducer: prducerss,
+            writer: writerss,
+            director: directorss
+        }
+        res.status(200).json({ movie: newMovie, status: true });
+    } else {
+        res.status(401).json({ message: "Invalid Admin Data!" });
+    }
+});
+
+export const postReview = asyncHandler(async (req, res) => {
+    const { rating, review, userId } = req.body;
+    const movie = await Movie.findById(req.params.id)
+    console.log("userId", req.body)
+    if (movie) {
+        const alreadyReviewed = movie.reviews.find(
+            (r) => r.user.toString() === userId.toString()
+        )
+        if (alreadyReviewed) {
+            res.status(400).json({ message: 'Movie already reviewed', status: false, code: 400 })
+        }
+        const revieww = {
+            rating,
+            review,
+            user: userId
+        }
+        movie.reviews.push(revieww)
+        await movie.save()
+        res.status(201).json({ message: 'Review added', status: true, code: 201 })
+    } else {
+        res.status(404).json({ message: 'Movie not found', status: false, code: 404 })
+    }
+})
 
 
 export const deleteMovie = asyncHandler(async (req, res) => {

@@ -1,19 +1,17 @@
 <nav class="bg-blue-500 p-4">
     <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center justify-center">
-            <a href="/" class="text-white text-2xl font-semibold">ShowCase</a>
+            <a href="/" class="text-white text-2xl font-semibold">ViewUFlix</a>
             <ul class="flex space-x-6 ml-4 mt-1 font-semibold">
-                <li><a href="movies" class="text-white">Movies</a></li>
-                <li><a href="tv-shows" class="text-white">Tv Shows</a></li>
+                <li><a href="/movies" class="text-white">Movies</a></li>
+                <li><a href="/tv-shows" class="text-white">Tv Shows</a></li>
                 <!-- Dropdown Menu -->
                 <li class="relative group">
                     <a href="#" class="text-white px-3 py-2 rounded-full">More</a>
                     <!-- Dropdown Content -->
                     <ul
                         class="absolute hidden space-y-2 w-[150px] text-md bg-white text-gray-800 group-hover:block rounded-lg shadow-md mt-[6px] z-50">
-                        <li><a href="#" class="block px-4 py-1 hover:rounded-lg hover:bg-gray-200">Item 1</a></li>
-                        <li><a href="#" class="block px-4 py-1 hover:rounded-lg hover:bg-gray-200">Item 2</a></li>
-                        <li><a href="#" class="block px-4 py-1 hover:rounded-lg hover:bg-gray-200">Item 3</a></li>
+                        <li><a href="/profile" class="block px-4 py-1 hover:rounded-lg hover:bg-gray-200">Protected Route</a></li>
                     </ul>
                 </li>
                 <!-- End Dropdown Menu -->
@@ -38,7 +36,7 @@
                         </ul>
                     </div>
                     <% } else { %>
-                        <a href="login"
+                        <a href="/login"
                             class="bg-white text-blue-500 hover:bg-gray-200 font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">Login</a>
 
                         <!-- <a href="/api/user/logout"

@@ -13,6 +13,8 @@ import Movie from './models/movieModel.js'
 import session from 'express-session'
 import { isAuthenticated } from './middleware/verifyUser.js';
 import User from './models/userModel.js';
+import Genere from './models/genereModel.js';
+import Cast from './models/castModel.js';
 
 
 const app = express();
@@ -26,7 +28,7 @@ app.use(bodyParser.json());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log("filee",file)
+    console.log("filee", file)
     cb(null, 'images');
   },
   filename: function (req, file, cb) {
@@ -87,10 +89,7 @@ app.get('/api/user/logout', (req, res) => {
   });
 });
 
-app.get('/movies', async function (req, res) {
-  let records = await Movie.find();
-  res.render("movies", { movies: records });
-});
+
 
 app.get('/register', function (req, res) {
   res.render("register");
@@ -101,6 +100,88 @@ app.get('/profile', isAuthenticated, async (req, res) => {
   res.render("profile", { user });
 });
 
+app.get('/movies', async function (req, res) {
+
+  const ITEMS_PER_PAGE = 4;
+  const pageNumber = parseInt(req.query.page) || 1;
+  const skip = (pageNumber - 1) * ITEMS_PER_PAGE;
+  const searchTerm = req.query.search;
+  let filteredMovies;
+
+  try {
+    const movies = await Movie.find().skip(skip).limit(ITEMS_PER_PAGE);
+    const allMovies = await Movie.find()
+    const totalMovies = await Movie.countDocuments();
+    const totalPages = Math.ceil(totalMovies / ITEMS_PER_PAGE);
+
+
+    if (searchTerm) {
+      filteredMovies = allMovies.filter(movie => movie.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      if (filteredMovies.length === 0) {
+        filteredMovies = movies;
+      } else {
+        filteredMovies = filteredMovies.slice(skip, skip + ITEMS_PER_PAGE);
+      }
+    } else {
+      filteredMovies = movies;
+    }
+    res.render("movies", {
+      movies: filteredMovies,
+      user: req.session.user,
+      currentPage: pageNumber,
+      totalPages
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get('/movies/:id', async function (req, res) {
+  try {
+    const movie = await Movie.findById(req.params.id)
+      .populate('allCast.id')
+    const generess = [], prducerss = [], writerss = [], directorss = [], reviewss = [];
+    for (const genere of movie.genere) {
+      const genereData = await Genere.findById(genere);
+      generess.push(genereData);
+    }
+    for (const prducer of movie.prducer) {
+      const prducerData = await Cast.findById(prducer);
+      prducerss.push(prducerData);
+    }
+    for (const writer of movie.writer) {
+      const writerData = await Cast.findById(writer);
+      writerss.push(writerData);
+    }
+    for (const director of movie.director) {
+      const directorData = await Cast.findById(director);
+      directorss.push(directorData);
+    }
+    for (const review of movie.reviews) {
+      const reviewData = await User.findById(review.user);
+      reviewss.push({ ...review._doc, user: reviewData });
+    }
+    const newMovie = {
+      ...movie._doc,
+      genere: generess,
+      prducer: prducerss,
+      writer: writerss,
+      director: directorss,
+      reviews: reviewss
+    }
+console.log("new",newMovie)
+    res.render("movie", { movie: newMovie, user: req.session.user });
+  } catch (error) {
+    console.error(error);
+    res.render("movie", { movie: {}, user: req.session.user })
+  }
+}
+);
+
+app.get('/tv-shows', async function (req, res) {
+  res.render("tv-shows", { user: req.session.user });
+});
 
 
 const storagee = multer.diskStorage({
