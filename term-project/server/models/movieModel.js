@@ -1,40 +1,22 @@
 import mongoose from 'mongoose'
 const moviesScheme = mongoose.Schema({
-    movieId: String,
     name: String,
     releaseDate: String,
     description: String,
     language: String,
+    classification: String,
     poster: String,
-    trailer: String,
-    status: String,
-    genre: [{genreId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Genre"
-    }}],
-    cast: [{castId: {
+    genere: [String],
+    allCast: [{id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Cast"
-    }, as: String, character: String, images: [String]}],
-    director: [{castId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Cast"
-    }}],
-    prducers:[
-        {producerId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Cast"
-        }}
-    ],
-    writers: [
-        {writerId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Cast"
-        }}
-    ],
+    }, characterName: String, character: String}],
+    director: [String],
+    prducer:[String],
+    writer: [String],
     duration: String,
     photos: [String],
-    videos: [String],
+    trailer: String,
 }, {
     timestamps: true
 }

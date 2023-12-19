@@ -1,12 +1,6 @@
 import React,{useState, useEffect} from "react"
 import { Route, Routes,useNavigate } from 'react-router-dom';
 import AdminDashboard from './layout/AdminDashboard';
-import StudentList from './pages/StudentList';
-import DocumentLibrary from './pages/DocumentLibrary/DocumentLibrary';
-import Record from './pages/StudentRecord/Record';
-import EnrollmentDocuments from './pages/StudentRecord/EnrollmentDocuments';
-import CampusContent from './pages/CampusContent/CampusContent';
-// import MainDashbord from './pages/EnrollmentJourny/MainDashbord';
 import Users from './pages/Users';
 import Movies from './pages/Movies';
 import TvShows from './pages/TvShows';
@@ -22,6 +16,7 @@ function App() {
   const navigate = useNavigate();
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(['x-auth-admin']);
+  // eslint-disable-next-line
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -47,20 +42,12 @@ function App() {
       <Routes>
       <Route path="/login" element={<Signin />} />
         <Route path="/" element={<AdminDashboard />}>
-          {/* <Route index element={<MainDashbord />} /> */}
-          {/* <Route path="dashboard" element={<MainDashbord />} /> */}
           <Route index element={<Users />} />
           <Route path="users" element={<Users />} />
           <Route path="movies" element={<Movies />} />
           <Route path="cast" element={<Cast />} />
           <Route path="tv-shows" element={<TvShows />} />
           <Route path="genres" element={<Genres />} />
-          <Route path="document-library" element={<DocumentLibrary />} />
-          <Route path="users" element={<DocumentLibrary />} />
-          <Route path="student-list" element={<StudentList />} />
-          <Route path="enrollment-document" element={<EnrollmentDocuments />} />
-          <Route path="campus-content" element={<CampusContent />} />
-          <Route path="student-record" element={<Record />} />
         </Route>
       </Routes>
     </div>

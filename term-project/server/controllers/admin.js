@@ -4,6 +4,8 @@ import Admin from '../models/adminModel.js';
 import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs'
 import Genere from '../models/genereModel.js';
+import Cast from '../models/castModel.js';
+import Movie from '../models/movieModel.js';
 
 export const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -122,10 +124,121 @@ export const allGeneres = asyncHandler(async (req, res) => {
     }
 })
 
+export const updateGenere = asyncHandler(async (req, res) => {
+    try {
+        const genere = await Genere.findById(req.params.id)
+        if (genere) {
+            genere.name = req.body.name || genere.name
+
+            const updatedGenere = await genere.save()
+            res.status(200).json({ message: 'Genere updated successfully', genere:updatedGenere, status: true })
+        }
+        else {
+            res.status(401).json({ message: "Invalid Admin Data!" })
+        }
+    } catch (error) {
+
+    }
+})
 export const deleteGenere = asyncHandler(async (req, res) => {
     try {
         await Genere.findOneAndDelete({ _id: req.params.id })
         res.status(200).json({ message: 'Genere deleted successfully', status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const addCast = asyncHandler(async (req, res) => {
+    try {
+        const newCast = await Cast.create(req.body)
+        const cast = await newCast.save()
+
+        res.status(201).json({ message: 'Cast created successfully', cast, status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const allCasts = asyncHandler(async (req, res) => {
+    const casts = await Cast.find({}).sort({ createdAt: -1 })
+    if (casts) {
+        res.status(200).json({ casts, status: true })
+    }
+    else {
+        res.status(401).json({ message: "Invalid Admin Data!" })
+    }
+})
+
+export const deleteCast = asyncHandler(async (req, res) => {
+    try {
+        await Cast.findOneAndDelete({ _id: req.params.id })
+        res.status(200).json({ message: 'Cast deleted successfully', status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const addMovie = asyncHandler(async (req, res) => {
+    const { durationHRS, durationMINS } = req.body
+    try {
+        req.body.duration = `${durationHRS}h ${durationMINS}m`
+        const newMovie = await Movie.create(req.body)
+        const movie = await newMovie.save()
+
+        res.status(201).json({ message: 'Movie created successfully', movie, status: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message, status: false })
+    }
+})
+
+export const allMovies = asyncHandler(async (req, res) => {
+    const movies = await Movie.find({})
+        .populate('allCast.id')
+        .sort({ createdAt: -1 });
+
+    if (movies) {
+        const allPromises = movies.map(async (movie) => {
+            const generess = [], prducerss = [], writerss = [], directorss = []
+            for (const genere of movie.genere) {
+                const genereData = await Genere.findById(genere);
+                generess.push(genereData);
+            }
+            for (const prducer of movie.prducer) {
+                const prducerData = await Cast.findById(prducer);
+                prducerss.push(prducerData);
+            }
+            for (const writer of movie.writer) {
+                const writerData = await Cast.findById(writer);
+                writerss.push(writerData);
+            }
+            for (const director of movie.director) {
+                const directorData = await Cast.findById(director);
+                directorss.push(directorData);
+            }
+            const newMovie = {
+                ...movie._doc,
+                genere: generess,
+                prducer: prducerss,
+                writer: writerss,
+                director: directorss
+            }
+
+            return newMovie;
+        });
+        const moviess = await Promise.all(allPromises);
+        res.status(200).json({ movies: moviess, status: true });
+    } else {
+        res.status(401).json({ message: "Invalid Admin Data!" });
+    }
+});
+
+
+
+export const deleteMovie = asyncHandler(async (req, res) => {
+    try {
+        await Movie.findOneAndDelete({ _id: req.params.id })
+        res.status(200).json({ message: 'Movie deleted successfully', status: true })
     } catch (error) {
         res.status(500).json({ message: error.message, status: false })
     }

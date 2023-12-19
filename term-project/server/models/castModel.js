@@ -2,10 +2,8 @@ import mongoose from 'mongoose'
 const castScheme = mongoose.Schema({
     firstName: String,
     lastName: String,
-    email: String,
     gender: String,
     dateOfBirth: String,
-    address: String,
     city: String,
     country: String,
     images: [String],
@@ -17,7 +15,7 @@ const castScheme = mongoose.Schema({
     weight: String,
     hair: String,
     description: String,
-    role: String,
+    role: [String],
 }, {
     timestamps: true
 }

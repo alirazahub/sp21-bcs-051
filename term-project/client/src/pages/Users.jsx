@@ -230,7 +230,7 @@ const Users = () => {
                         size='middle'
                         columns={columns}
                         dataSource={data}
-                        pagination={false}
+                        pagination={{ pageSize: 7 }}
                     />
                 )}
             </div>

@@ -1,6 +1,9 @@
 import express from "express";
-import { login, register, verify, allUsers, deleteUser, addNewUser,
-    addGenere,allGeneres, deleteGenere } from "../controllers/admin.js";
+import {
+    login, register, verify, allUsers, deleteUser, addNewUser,
+    addGenere, allGeneres, deleteGenere, addCast, allCasts, deleteCast,
+    addMovie, allMovies, deleteMovie, updateGenere
+} from "../controllers/admin.js";
 import { verifyUser } from '../middleware/verifyUser.js'
 
 const router = express.Router();
@@ -13,7 +16,16 @@ router.post("/add-user", addNewUser);
 router.delete("/delete-user/:id", deleteUser);
 
 router.post("/add-genere", addGenere);
+router.put("/update-genere/:id", updateGenere);
 router.get("/all-generes", allGeneres);
 router.delete("/delete-genere/:id", deleteGenere);
+
+router.post("/add-cast", addCast);
+router.get("/all-casts", allCasts);
+router.delete("/delete-cast/:id", deleteCast);
+
+router.post("/add-movie", addMovie);
+router.get("/all-movies", allMovies);
+router.delete("/delete-movie/:id", deleteMovie);
 
 export default router;

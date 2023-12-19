@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Space, Table, Dropdown, Image } from 'antd';
+import { Space, Table, Dropdown } from 'antd';
 import { BsPlus, BsEye } from "react-icons/bs";
 import { FiEdit } from 'react-icons/fi';
 import { RxDotsVertical } from 'react-icons/rx';
@@ -11,22 +11,23 @@ import { MdDelete } from 'react-icons/md';
 import { useEffect } from 'react';
 
 const Genres = () => {
+    const [isEdit, setIsEdit] = useState(false);
+    const [editData, setEditData] = useState({});
+
+    const handleEdit = (data) => {
+        setIsEdit(true);
+        setEditData(data);
+    }
     const subActionLinks = [
-        {
-            key: '1',
-            label: 'View Details',
-            icon: <BsEye size={25} />,
-            onClick: (data) => alert(`Notification Send ${data.name}`),
-        },
         {
             key: '2',
             label: 'Edit',
             icon: <FiEdit size={25} />,
-            onClick: () => alert('SMS SENT'),
+            onClick: (data) => handleEdit(data),
         },
         {
             key: '3',
-            label: 'Remove Item',
+            label: 'Remove Genere',
             icon: <MdDelete size={25} />,
             onClick: (data) => handleDelete(data?._id),
         }
@@ -75,6 +76,30 @@ const Genres = () => {
             });
         }
     }
+
+    const handleUpdate = async (values) => {
+        try {
+            const res = await axios.put(`${key}/api/admin/update-genere/${editData._id}`, values);
+            if (res.data.status) {
+                const newData = [...data];
+                const index = newData.findIndex((item) => item._id === editData._id);
+                newData[index] = res.data.genere;
+                setData(newData);
+                notification.success({
+                    message: 'Success',
+                    description: res?.data?.message,
+                });
+                setIsEdit(false);
+            }
+        } catch (error) {
+            console.log(error);
+            notification.error({
+                message: 'Error',
+                description: 'Something went wrong',
+            });
+        }
+    }
+
     const columns = [
         {
             title: 'ID',
@@ -181,6 +206,30 @@ const Genres = () => {
                     </Form.Item>
                 </Form>
             </Modal>
+            <Modal
+                title="Edit Genere"
+                centered
+                visible={isEdit}
+                footer={false}
+                onCancel={() => setIsEdit(false)}
+                destroyOnClose
+            >
+                <Form form={form} layout="vertical" onFinish={handleUpdate} initialValues={editData}>
+                    <Form.Item
+                        name="name"
+                        label="Name"
+                        rules={[{ required: true, message: 'Please enter the genere name' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" className="w-full" danger>
+                            Update Genere
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
             <div className='flex justify-between bg-orange-100 p-3 items-center'>
                 <div className='font-bold text-[23px]'>All Genres</div>
                 <button className="bg-primary py-1 px-3 pt-2 rounded-lg text-white flex" onClick={() => setModalVisible(true)}>

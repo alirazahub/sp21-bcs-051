@@ -16,6 +16,7 @@ import User from './models/userModel.js';
 
 
 const app = express();
+app.use(express.json({ limit: '10mb' }));
 app.use(cors())
 dotenv.config()
 connectDB();
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log("filee",file)
     cb(null, 'images');
   },
   filename: function (req, file, cb) {
@@ -101,7 +103,24 @@ app.get('/profile', isAuthenticated, async (req, res) => {
 
 
 
+const storagee = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'images');
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
 
+const uploadd = multer({ storage: storagee });
+
+app.post('/api/admin/upload', uploadd.single("file"), (req, res) => {
+  if (req.file) {
+    res.status(200).json({ message: 'File Uploaded Successfully', success: true, fileName: req.file.filename })
+  } else {
+    res.status(500).json({ message: 'File Not Uploaded', success: false })
+  }
+});
 
 //  backend api routes
 app.get('/api', (req, res) => {
