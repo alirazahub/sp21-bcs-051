@@ -1,14 +1,57 @@
-<div class="my-4 flex justify-center">
-    <input type="text" id="search" placeholder="search...." name="search" class="p-2 w-96 outline-none border-[1px] border-gray-600 rounded-l-full">
-    <button onclick="searchMovies()"
-        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-r-full transition duration-300 transform hover:scale-105">
-    <i class="fa fa-search" aria-hidden="true"></i>
-    </button>
+<div class="flex justify-between mx-10 items-center">
+    <!-- Add this code for filters above your movie grid -->
+    <div class="flex justify-center my-4 items-center">
+        filter by:
+        <i class="fa fa-filter text-blue-500" aria-hidden="true"></i>
+        <label class="mx-2">Language:
+            <select id="languageFilter" class="outline-none border-[1px] border-blue-600 w-[100px] rounded-full px-2 py-[5px]">
+                <option value="">All</option>
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+                <option value="Italian">Italian</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Korean">Korean</option>
+                <option value="Mandarin">Mandarin</option>
+                <option value="Russian">Russian</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Portuguese">Portuguese</option>
+            </select>
+        </label>
+
+        <label class="mx-2">Classification:
+            <select id="classificationFilter" class="outline-none border-[1px] border-blue-600 w-[100px] rounded-full px-2 py-[5px]">
+                <option value="">All</option>
+                <option value="PG-13">PG-13</option>
+                <option value="R">R</option>
+                <option value="NC-17">NC-17</option>
+                <option value="X">X</option>
+                <option value="XXX">XXX</option>
+
+            </select>
+        </label>
+
+        <button onclick="applyFilters()"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">
+            Apply Filters
+        </button>
+    </div>
+    <div class="my-4 flex justify-center">
+        <input type="text" id="search" placeholder="search...." name="search"
+            class="p-2 w-96 outline-none border-[1px] border-gray-600 rounded-l-full">
+        <button onclick="searchMovies()"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-r-full transition duration-300 transform hover:scale-105">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </div>
+
 </div>
 <div class="m-10 grid grid-cols-2 gap-10">
     <% movies.forEach(movie=> { %>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden flex justify-between">
-            <img src="http://localhost:5000/images/<%= movie.poster %>" alt="Movie 4" class=" h-72 object-cover">
+            <img src="/images/<%= movie.poster %>" alt="Movie 4" class=" h-72 object-cover">
             <div class="p-4">
                 <h3 class="text-xl font-semibold">
                     <%= movie.name %>
@@ -69,5 +112,13 @@
 
         // Redirect to the movies page with the search query
         window.location.href = `/movies?search=${encodeURIComponent(searchTerm)}`;
+    }
+
+    function applyFilters() {
+        const languageFilter = document.getElementById('languageFilter').value;
+        const classificationFilter = document.getElementById('classificationFilter').value;
+
+        // Redirect to the movies page with the search query
+        window.location.href = `/movies?language=${encodeURIComponent(languageFilter)}&classification=${encodeURIComponent(classificationFilter)}`;
     }
 </script>

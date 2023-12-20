@@ -130,7 +130,7 @@ const Movies = () => {
             render: (_, record) => (
                 <Space>
                     {record.genere.map((item) => (
-                        <div key={item._id} className='capitalize'>{item.name}</div>
+                        <div key={item?._id} className='capitalize'>{item?.name}</div>
                     ))}
                 </Space>
             ),

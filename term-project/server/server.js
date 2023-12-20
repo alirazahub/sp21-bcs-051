@@ -74,8 +74,9 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-app.get('/', function (req, res) {
-  res.render('landing', { user: req.session.user });
+app.get('/', async (req, res) => {
+  const movies = await Movie.find()
+  res.render('landing', { user: req.session.user, movies });
 });
 
 app.get('/login', function (req, res) {
@@ -106,6 +107,8 @@ app.get('/movies', async function (req, res) {
   const pageNumber = parseInt(req.query.page) || 1;
   const skip = (pageNumber - 1) * ITEMS_PER_PAGE;
   const searchTerm = req.query.search;
+  const language = req.query.language;
+  const classification = req.query.classification;
   let filteredMovies;
 
   try {
@@ -125,6 +128,17 @@ app.get('/movies', async function (req, res) {
     } else {
       filteredMovies = movies;
     }
+
+    if (language) {
+      filteredMovies = filteredMovies.filter(movie => movie.language === language);
+    }
+    if (classification) {
+      filteredMovies = filteredMovies.filter(movie => movie.classification === classification);
+    }
+    if (language && classification) {
+      filteredMovies = filteredMovies.filter(movie => movie.language === language && movie.classification === classification);
+    }
+
     res.render("movies", {
       movies: filteredMovies,
       user: req.session.user,
@@ -170,7 +184,7 @@ app.get('/movies/:id', async function (req, res) {
       director: directorss,
       reviews: reviewss
     }
-console.log("new",newMovie)
+    console.log("new", newMovie)
     res.render("movie", { movie: newMovie, user: req.session.user });
   } catch (error) {
     console.error(error);
