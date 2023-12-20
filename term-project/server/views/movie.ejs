@@ -53,7 +53,7 @@
         </div>
         <h3 class="font-bold text-[20px] my-3">Writer</h3>
         <div class="flex">
-            <% movie?.writer.forEach(cast=> { %>
+            <% movie?.writer?.forEach(cast=> { %>
                 <div class="bg-white overflow-hidden flex justify-between m-5">
                     <img src="http://localhost:5000/images/<%= cast.images[0] %>" alt="Movie 4"
                         class="w-20 h-20 object-cover rounded-full">
@@ -105,7 +105,7 @@
         <% if (movie?.reviews?.length===0) { %>
             <p class="text-gray-600 text-[14px]">No reviews yet</p>
             <% } %>
-                <div class="grid grid-cols-5 gap-10">
+                <div class="grid grid-cols-4 gap-10">
                     <% movie?.reviews?.forEach(review=> { %>
                         <div class="bg-white overflow-hidden">
                             <img src="http://localhost:5000/images/<%= review?.user?.image %>" alt="Movie 4"
@@ -130,6 +130,13 @@
                                                 </span>
                                                 <% } %>
                                 </p>
+                                <% if (typeof user !=='undefined' && user && user?._id == review?.user?._id) { %>
+                                    <button onclick="deleteReview('<%= review._id %>', '<%= movie?._id %>')"
+                                        class="text-red-500 hover:text-red-600 font-semibold py-2 px-6 transition duration-300 transform hover:scale-105">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <% }%>
+
                             </div>
                         </div>
                         <% }) %>
@@ -205,6 +212,22 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.code === 400){
+                    return alert(data.message);
+                }else{
+                    window.location.reload();
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
+    function deleteReview(reviewId, movieId) {
+        fetch(`/api/admin/delete-review/${movieId}/${reviewId}`, {
+            method: 'DELETE'
         })
             .then(res => res.json())
             .then(data => {

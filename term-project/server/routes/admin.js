@@ -2,7 +2,7 @@ import express from "express";
 import {
     login, register, verify, allUsers, deleteUser, addNewUser,
     addGenere, allGeneres, deleteGenere, addCast, allCasts, deleteCast,
-    addMovie, allMovies, deleteMovie, updateGenere, postReview
+    addMovie, allMovies, deleteMovie, updateGenere, postReview, deleteReview
 } from "../controllers/admin.js";
 import { verifyUser } from '../middleware/verifyUser.js'
 
@@ -28,5 +28,6 @@ router.post("/add-movie", addMovie);
 router.get("/all-movies", allMovies);
 router.delete("/delete-movie/:id", deleteMovie);
 router.post("/post-review/:id",postReview)
+router.delete("/delete-review/:movieId/:reviewId",deleteReview)
 
 export default router;

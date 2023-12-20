@@ -279,15 +279,39 @@ export const postReview = asyncHandler(async (req, res) => {
         )
         if (alreadyReviewed) {
             res.status(400).json({ message: 'Movie already reviewed', status: false, code: 400 })
+        } else {
+            const revieww = {
+                rating,
+                review,
+                user: userId
+            }
+            movie.reviews.push(revieww)
+            await movie.save()
+            res.status(201).json({ message: 'Review added', status: true, code: 201 })
         }
-        const revieww = {
-            rating,
-            review,
-            user: userId
+    } else {
+        res.status(404).json({ message: 'Movie not found', status: false, code: 404 })
+    }
+})
+
+export const deleteReview = asyncHandler(async (req, res) => {
+    const movie = await Movie.findById(req.params.movieId)
+    if (movie) {
+        const review = movie.reviews.find(
+            (r) => r._id.toString() == req.params.reviewId.toString()
+        )
+        for (const review of movie.reviews) {
+            console.log("review", review._id.toString())
         }
-        movie.reviews.push(revieww)
-        await movie.save()
-        res.status(201).json({ message: 'Review added', status: true, code: 201 })
+        console.log("reviewID", req.params.reviewId.toString())
+
+        if (review) {
+            movie.reviews.pull(review)
+            await movie.save()
+            res.status(200).json({ message: 'Review deleted', status: true, code: 200 })
+        } else {
+            res.status(404).json({ message: 'Review not found', status: false, code: 404 })
+        }
     } else {
         res.status(404).json({ message: 'Movie not found', status: false, code: 404 })
     }
