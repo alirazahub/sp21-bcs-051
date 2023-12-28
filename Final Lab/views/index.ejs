@@ -1,0 +1,48 @@
+<div class=" flex justify-center">
+
+    <div class="bg-white p-8 rounded shadow-md w-full">
+        <h1 class="text-3xl font-bold mb-4">Task Manager</h1>
+        <% if (tasks.length === 0) { %>
+            <p class="text-gray-600">No tasks to display</p>
+        <% } else { %>
+            <table class="w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="py-2 px-4 border-b">Title</th>
+                        <th class="py-2 px-4 border-b">Description</th>
+                        <th class="py-2 px-4 border-b">Status</th>
+                        <th class="py-2 px-4 border-b">Due Date</th>
+                        <th class="py-2 px-4 border-b">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% tasks.forEach(task => { %>
+                        <tr class="border-b">
+                            <td class="py-2 px-4">
+                                <%= task.title %>
+                            </td>
+                            <td class="py-2 px-4">
+                                <%= task.description %>
+                            </td>
+                            <td class="py-2 px-4">
+                                <%= task.status %>
+                            </td>
+                            <td class="py-2 px-4">
+                                <%= task.dueDate %>
+                            </td>
+                            <td class="py-2 px-4">
+                                <form action="/tasks/<%= task.id %>/delete" method="post" style="display:inline;">
+                                    <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                                </form>
+                                <a href="/tasks/<%= task._id %>/edit" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } %>
+        <div class="my-3">
+            <a href="/tasks/new" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">New Task</a>
+        </div>
+    </div>
+</div>
